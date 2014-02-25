@@ -1,4 +1,4 @@
-//copyright devrim baris acardddd
+//copyright devrim baris acar
 //global variables
 PFont font;
 
