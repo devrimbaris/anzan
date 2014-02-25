@@ -1,16 +1,132 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Hello Web - Processing.js Test</title>
+  <head>
+    <title>Mobile Anzan</title>
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">    
+    <script src="http://yui.yahooapis.com/3.13.0/build/yui/yui-min.js"></script>
     <script src="processing-1.4.1.min.js"></script>
-</head>
-<body>
-    <h1>Processing.js Test</h1>
-<input type="button" value="Reload Page" onClick="window.location.reload()">
-    <p>This is my first Processing.js web-based sketch:</p>
-    <canvas data-processing-sources="anzan.pde"></canvas>
-</body>
+
+    <script type="text/javascript">
+      
+      function startAnzanSession(id) {
+      var pjs = Processing.getInstanceById(id);
+      var minNumber = document.getElementById('minNumber').value;
+      var maxNumber = document.getElementById('maxNumber').value;
+      var totalNumbers = document.getElementById('totalNumbers').value;
+      var interval = document.getElementById('interval').value;
+      pjs.startAnzan(minNumber,maxNumber,totalNumbers,interval);
+      }
+
+      function showResult(id) {
+      var pjs = Processing.getInstanceById(id);
+      pjs.showResult();
+      }
+
+
+    </script>
+
+    <script type="text/javascript">
+      YUI().use('node', function(Y) {
+      Y.delegate('click', function(e) {
+      var buttonID = e.currentTarget.get('id'),
+      node = Y.one('#demo');
+      if (buttonID === 'show') {
+      node.show();
+      } else if (buttonID === 'hide') {
+      node.hide();
+      } else if (buttonID === 'toggle') {
+      node.toggleView();
+
+      }
+
+
+      }, document, 'button');
+      });
+    </script>
+    
+    <STYLE type="text/css">
+      body { 
+      margin: 12px 12px 12px 12px;
+      padding: 3px 3px 3px 3px;
+      }
+      
+    </STYLE>
+
+  </head>
+  <body>
+    <div>
+      <style scoped>
+
+
+        .pure-button-xlarge {
+        background: rgb(66, 184, 221); /* this is a light blue */
+        color: white;
+        border-radius: 4px;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        padding:0.5em;
+        margin:10px;
+        font-size: 170%;
+        }
+
+      </style>
+
+      <button id="toggle" class="pure-button pure-button-xlarge">Settings</button>
+      <div  class="pure-g-r">
+        <div class="pure-controls" >      
+
+          <div id="demo" class="pure-u-1-4"  style="display: none;" >
+
+            <form class="pure-form pure-form-stacked">
+              <fieldset>
+                
+                <div class="pure-control-group"> 
+                  <label for="minNumber">Min:</label>
+                  <input type="textfield" value="45"   id="minNumber"></div>
+                <div class="pure-control-group">
+                  <label for="maxNumber">Max:</label>
+                  <input type="textfield" value="90"   id="maxNumber"></div>
+                <div class="pure-control-group">
+                  <label for="totalNumbers">TotalNumbers:</label>
+                  <input type="textfield" value="2" id="totalNumbers"></div>
+                <div class="pure-control-group">
+                  <label for="interval">Interval:</label>
+                  <input type="textfield" value="9000" id="interval"></div>
+
+                
+              </fieldset>
+            </form>
+
+          </div>
+
+          <div class="pure-u-1-2">
+            <table class="pure-table" >
+              <tr>
+                <td>
+                  <div class="pure-controls" >      
+                    <input type="button" value="Start" onClick="startAnzanSession('anzan')" class="pure-button pure-button-xlarge">
+                  </div>
+
+                </td>
+                <td>
+                  <div class="pure-controls" >      
+                    <input type="button" value="Show Result" onClick="showResult('anzan')" class="pure-button pure-button-xlarge">
+                  </div>
+
+                </td>
+              </tr>
+            </table>
+            <div class="l-box">
+              <canvas id="anzan" data-processing-sources="anzan.pde"></canvas>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      
+
+  </body>
 </html>
 
 
